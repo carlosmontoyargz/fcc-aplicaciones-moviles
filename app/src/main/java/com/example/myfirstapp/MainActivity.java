@@ -8,7 +8,8 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity
 {
-	public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+	public static final String VALOR_1 = "com.example.myfirstapp.VALOR_1";
+	public static final String VALOR_2 = "com.example.myfirstapp.VALOR_2";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +25,9 @@ public class MainActivity extends AppCompatActivity
 	{
 		Intent intent = new Intent(this, DisplayMessageActivity.class);
 		EditText editText = findViewById(R.id.editText);
-		String message = editText.getText().toString();
-		intent.putExtra(EXTRA_MESSAGE, message);
+		EditText editText2 = findViewById(R.id.editText2);
+		intent.putExtra(VALOR_1, editText.getText().toString());
+		intent.putExtra(VALOR_2, editText2.getText().toString());
 		startActivity(intent);
 	}
 }
