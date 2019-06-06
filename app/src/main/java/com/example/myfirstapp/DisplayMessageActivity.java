@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.myfirstapp.service.UtilsService;
+
 public class DisplayMessageActivity extends AppCompatActivity {
 
 	@Override
@@ -17,8 +19,34 @@ public class DisplayMessageActivity extends AppCompatActivity {
 		String message = intent.getStringExtra(MainActivity.VALOR_1);
 		String message2 = intent.getStringExtra(MainActivity.VALOR_2);
 
-		// Capture the layout's TextView and set the string as its text
-		TextView textView = findViewById(R.id.textView);
-		textView.setText(message);
+		try
+		{
+			int n1 = Integer.parseInt(message);
+			int n2 = Integer.parseInt(message2);
+			int suma = n1 + n2;
+			String esCapMsg = UtilsService.esCapicua(suma)? "es" : "NO es";
+			String msg = "La suma es " + suma + " y el numero " + esCapMsg + " capicua";
+
+			TextView textView = findViewById(R.id.textView);
+			textView.setText(msg);
+		}
+		catch (NumberFormatException e)
+		{
+			String msg = message + message2;
+
+			int vocales = UtilsService.contarVocales(msg);
+			int consonantes = UtilsService.contarConsonantes(msg);
+			int palabras = UtilsService.contarPalabras(msg);
+			String esPalindromoStr = UtilsService.esPalindromo(msg)? "es palindromo" : "no es palindromo";
+
+			msg = "La concatenacion es " + msg +
+					", tiene " + palabras + " palabras, " +
+					vocales + " vocales, " +
+					consonantes + " consonantes y " +
+					esPalindromoStr;
+
+			TextView textView = findViewById(R.id.textView);
+			textView.setText(msg);
+		}
 	}
 }
